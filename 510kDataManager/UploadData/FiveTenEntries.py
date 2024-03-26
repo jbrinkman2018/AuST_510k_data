@@ -54,15 +54,15 @@ class FiveTenEntries:
             if (self.applicants[applicant] < self.MIN_APPLICANTS_VALUE):
                 self.removeApplicantsLater.append(applicant)
         
-        # for type in self.types:
-        #     if (self.types[type] < self.MIN_TYPES_VALUE):
-        #         self.removeTypesLater.append(applicant)        
+        for type in self.types:
+            if (self.types[type] < self.MIN_TYPES_VALUE):
+                self.removeTypesLater.append(applicant)        
         
         for applicantIndex in self.removeApplicantsLater:
             del self.applicants[applicantIndex]
         
-        # for typeIndex in self.removeTypesLater:
-        #     del self.types[typeIndex]
+        for typeIndex in self.removeTypesLater:
+            del self.types[typeIndex]
             
         self.applicants = dict(sorted(self.applicants.items(), key=lambda item: item[1], reverse=False))
-        # self.types = dict(sorted(self.types.items(), key=lambda item: item[1], reverse=True))
+        self.types = dict(sorted(self.types.items(), key=lambda item: item[1], reverse=False))
