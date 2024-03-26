@@ -56,7 +56,7 @@ class FiveTenEntries:
         
         for type in self.types:
             if (self.types[type] < self.MIN_TYPES_VALUE):
-                self.removeTypesLater.append(applicant)        
+                self.removeTypesLater.append(type)        
         
         for applicantIndex in self.removeApplicantsLater:
             del self.applicants[applicantIndex]
