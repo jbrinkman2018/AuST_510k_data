@@ -29,8 +29,6 @@ repl.eval(fiveTenEntries)
 # return desired graph/charts
 
 
-    
-
 
 #    print(len(fiveTenEntries.entryList))
 

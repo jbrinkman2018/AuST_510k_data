@@ -6,7 +6,7 @@ class FiveTenEntry:
     def __init__(self, entryString):
         onData = entryString.split('|')
         self.kNumber = onData[0]
-        self.applicants = onData[1]
+        self.applicant = onData[1].lower()
         self.contact = onData[2]
         self.street1 = onData[3]
         self.street2 = onData[4]

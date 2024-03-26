@@ -9,6 +9,15 @@ import sys
 from Client.Grapher import Grapher
 
 class Repl:
+    helpString = \
+    "These are your options\n\
+    - \"knumber\"\n\
+    - \"applicants\"\n\
+    - \"dateReceived\"\n\
+    - \"decisionDate\"\n\
+    - \"SSPIndicator\"\n\
+    - \"types\"\n"
+    
     def __init__(self) -> None:
         pass
         
@@ -23,16 +32,20 @@ class Repl:
             print(self.switch_case(input, dataEntries))
             
     def switch_case(self, argument, dataEntries):
-        
-        if argument == "at":
+            
+        if argument == "applicants":
             grapher = Grapher(dataEntries)
-            grapher.barGraph(dataEntries.APPLICANTS, dataEntries.APPLICANTSVALUES)
-            return "having fun"
+            grapher.barGraph(dataEntries.applicants, "Applicants", "Number of Applications", "Applicant")
+            return ""
+        
+        elif argument == "type":
+            grapher = Grapher(dataEntries)
+            grapher.barGraph(dataEntries.types, "Type", "Number of Applications", "Type of Application")
+            return ""
         
         elif argument == "help":
-            return "These are your options \
-                - \"a\" : applicants"
-                
+            return self.helpString
+        
         elif argument == "quit":
             return "You quit"
         
