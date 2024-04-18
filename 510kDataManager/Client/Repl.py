@@ -7,10 +7,12 @@
 import sys
 
 from Client.Grapher import Grapher
+from UploadData.Trimmer import Trimmer
 
 class Repl:
+    
     helpString = \
-    "These are your options\n\
+    "What category do you want to see?\n\
     - \"knumber\"\n\
     - \"applicant\"\n\
     - \"dateReceived\"\n\
@@ -18,19 +20,36 @@ class Repl:
     - \"SSPIndicator\"\n\
     - \"type\"\n"
     
+    helpTrimString = \
+    "How do you want to trim your data? <CATEGORY>, <CATEGORYVARIABLE | MINVALUESHOWN> \n\
+    Ex.) Applicant, Aust \n\
+    Type \"finished\" when done trimming \n\
+    Categories\n\
+    - \"knumber\"\n\
+    - \"applicant\"\n\
+    - \"dateReceived\"\n\
+    - \"decisionDate\"\n\
+    - \"SSPIndicator\"\n\
+    - \"type\"\n"
+    
+    
     def __init__(self) -> None:
         pass
         
     def eval(self, dataEntries):
         print('Welcome to the 510K Data Manager. Let\'s evaluate some Data. Type help to see your options')
-        
+        print(self.helpString)
         input =  sys.stdin.readline().strip()
-        print(self.switch_case(input, dataEntries))
+        graphing_input = input
         
-        while not input == 'quit':
-            input = sys.stdin.readline().strip()
-            print(self.switch_case(input, dataEntries))
+        while not input == 'finished':
             
+            print(self.helpTrimString)
+            input = sys.stdin.readline().strip()
+            print(Trimmer(dataEntries).eval(input))
+        
+        print(self.switch_case(graphing_input, dataEntries))   
+        
     def switch_case(self, argument, dataEntries):
             
         if argument == "applicant":
