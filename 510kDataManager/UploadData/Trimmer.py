@@ -1,6 +1,7 @@
 from UploadData.FiveTenEntry import FiveTenEntry
 from UploadData.FiveTenEntries import FiveTenEntries
 class Trimmer():
+    invalidInputString = "Expected: <CATEGORY>, <CATEGORYVARIABLE>"
     
     def __init__(self, data):
         self.data = data
@@ -12,20 +13,18 @@ class Trimmer():
             return self.data
         trimParams = trimString.split(', ')
         if (len(trimParams) < 2):
-            print("Expected: <CATEGORY>, <CATEGORYVARIABLE>")
+            print(self.invalidInputString)
         elif self.toPlural(trimParams[0].lower()) in dir(self.data):
-            print("in selfdata")
             if (trimParams[1].isdigit()):
-                print("Expected: <CATEGORY>, <CATEGORYVARIABLE>")
-                # self.trimDigit(trimParams[0], int(trimParams[1]))
+                print(self.invalidInputString)
             else:
                 for entry in self.data.entryList:
                     if trimParams[1].lower() == getattr(entry, trimParams[0].lower()):
                         self.resultEntries.add(entry)
                 if (len(self.resultEntries.entryList)<1):
-                    print("Expected: <CATEGORY>, <CATEGORYVARIABLE> (in ~len)")
+                    print(self.invalidInputString)
         else:
-             print("Expected: <CATEGORY>, <CATEGORYVARIABLE>")
+             print(self.invalidInputString)
              
         if (len(self.resultEntries.entryList)):
             return self.resultEntries
