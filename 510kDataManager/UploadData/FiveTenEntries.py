@@ -3,8 +3,7 @@
 class FiveTenEntries:
     # MIN_APPLICANTS_VALUE = 150
     DEFAULT_THRESHOLD = 0
-    removeApplicantsLater = []
-    removeTypesLater = []
+    removeLater = []
     
     def __init__(self):
         self.entryList = []
@@ -22,20 +21,14 @@ class FiveTenEntries:
         self.setDictionaries()
     
     def trimDigit(self, category, threshold):
-        
-        for applicant in self.applicants:
-            if (self.applicants[applicant] < 150):
-                self.removeApplicantsLater.append(applicant)
-        
-        for type in self.types:
-            if (self.types[type] < 10):
-                self.removeTypesLater.append(type)             
-        
-        for applicantIndex in self.removeApplicantsLater:
-            del self.applicants[applicantIndex]
-        
-        for typeIndex in self.removeTypesLater:
-            del self.types[typeIndex]
+        # print("i'm here")
+        if category in dir(self):
+            for item in getattr(self, category):
+                if (getattr(self, category).get(item) < int(threshold)):
+                    self.removeLater.append(item)
+            
+            for item in self.removeLater:
+                del getattr(self, category)[item]
         
     def clearDictionaries(self):
         self.kNumbers = dict()

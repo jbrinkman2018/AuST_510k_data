@@ -1,27 +1,33 @@
 from UploadData.FiveTenEntry import FiveTenEntry
 from UploadData.FiveTenEntries import FiveTenEntries
 class Trimmer():
-    invalidInputString = "Expected: <CATEGORY>, <CATEGORYVARIABLE>"
+    invalidInputString = "Expected: <CATEGORY>, <CATEGORYVARIABLE> | <THRESHOLDVALUE>"
     
     def __init__(self, data):
         self.data = data
         self.removeLater = []
         self.resultEntries = FiveTenEntries()
     
-    def eval(self, trimString):
+    def eval(self, trimString, digitOrString):
         if (trimString == "finished"):
             return self.data
         trimParams = trimString.split(', ')
         if (len(trimParams) < 2):
             print(self.invalidInputString)
-        elif self.toPlural(trimParams[0].lower()) in dir(self.data):
+        elif self.toPlural(trimParams[0]) in dir(self.data):
             if (trimParams[1].isdigit()):
-                print(self.invalidInputString)
+                if (digitOrString == "digit"):
+                    self.data.trimDigit(self.toPlural(trimParams[0]), trimParams[1])
+                else:
+                    print(self.invalidInputString)
             else:
-                for entry in self.data.entryList:
-                    if trimParams[1].lower() == getattr(entry, trimParams[0].lower()):
-                        self.resultEntries.add(entry)
-                if (len(self.resultEntries.entryList)<1):
+                if (digitOrString == "string"):
+                    for entry in self.data.entryList:
+                        if trimParams[1].lower() == getattr(entry, trimParams[0].lower()):
+                            self.resultEntries.add(entry)
+                    if (len(self.resultEntries.entryList)<1):
+                        print(self.invalidInputString)
+                else:
                     print(self.invalidInputString)
         else:
              print(self.invalidInputString)

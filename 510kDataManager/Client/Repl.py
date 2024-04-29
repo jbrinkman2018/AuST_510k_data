@@ -61,14 +61,14 @@ class Repl:
             while not input == 'finished':
                 print(self.helpTrimString)
                 input = sys.stdin.readline().strip()
-                dataEntries = (Trimmer(dataEntries).eval(input))
+                dataEntries = (Trimmer(dataEntries).eval(input, "string"))
             dataEntries.calcProperties()
             digitTrim = 'start'
             while not digitTrim == 'finished':
                 print(self.helpTrimDigit)
                 digitTrim= sys.stdin.readline().strip()
                 if (digitTrim != 'finished'):
-                    dataEntries = (Trimmer(dataEntries).eval(digitTrim))
+                    dataEntries = (Trimmer(dataEntries).eval(digitTrim, "digit"))
 
             print(self.helpGraphString)
             graphing_input =  sys.stdin.readline().strip()
