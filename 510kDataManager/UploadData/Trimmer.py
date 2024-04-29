@@ -1,50 +1,36 @@
-
-
+from UploadData.FiveTenEntry import FiveTenEntry
+from UploadData.FiveTenEntries import FiveTenEntries
 class Trimmer():
     
     def __init__(self, data):
         self.data = data
         self.removeLater = []
+        self.resultEntries = FiveTenEntries()
     
     def eval(self, trimString):
+        if (trimString == "finished"):
+            return self.data
         trimParams = trimString.split(', ')
-        
-        if self.toPlural(trimParams[0].lower()) in dir(self.data):
+        if (len(trimParams) < 2):
+            print("Expected: <CATEGORY>, <CATEGORYVARIABLE>")
+        elif self.toPlural(trimParams[0].lower()) in dir(self.data):
             print("in selfdata")
             if (trimParams[1].isdigit()):
-                self.trimDigit(int(trimParams[1]))
+                print("Expected: <CATEGORY>, <CATEGORYVARIABLE>")
+                # self.trimDigit(trimParams[0], int(trimParams[1]))
             else:
-                if trimParams[1].lower() in getattr(self.data, self.toPlural(trimParams[0].lower())):
-                    self.trimString(trimParams[1].lower)
-                else:
-                    print("Expected input <CATEGORY>, <CATEGORYVARIABLE | MINVALUE>")
-            
-    def trimDigit(self, trimParam):
-        print("intrimDigit")
-    
-    def trimString(self, trimParam):
-        for category in dir(self.data):
-            for dataValue in getattr(self.data, category):
-                if (getattr(getattr(self.data, category), dataValue) == trimParam):
-                    self.removeLater.append(getattr(getattr(self.data, category), dataValue))
-
-        for applicant in self.applicants:
-            if (self.applicants[applicant] < self.MIN_APPLICANTS_VALUE):
-                self.removeApplicantsLater.append(applicant)
-        
-        for type in self.types:
-            if (self.types[type] < self.MIN_TYPES_VALUE):
-                self.removeTypesLater.append(type)        
-        
-        
-        for applicantIndex in self.removeApplicantsLater:
-            del self.applicants[applicantIndex]
-        
-        for typeIndex in self.removeTypesLater:
-            del self.types[typeIndex]
-        
-        
-        print("intrimString")
+                for entry in self.data.entryList:
+                    if trimParams[1].lower() == getattr(entry, trimParams[0].lower()):
+                        self.resultEntries.add(entry)
+                if (len(self.resultEntries.entryList)<1):
+                    print("Expected: <CATEGORY>, <CATEGORYVARIABLE> (in ~len)")
+        else:
+             print("Expected: <CATEGORY>, <CATEGORYVARIABLE>")
+             
+        if (len(self.resultEntries.entryList)):
+            return self.resultEntries
+        else:
+            return self.data
         
     def toPlural(self, word):
         if word.endswith('y'):
