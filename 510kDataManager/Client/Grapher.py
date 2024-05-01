@@ -15,6 +15,7 @@ class Grapher:
         values = list(category.values())
         plt.barh(keys, values)
         plt.xticks(rotation='vertical', fontsize = 10)
+        # plt.yticks(rotation = 45, fontsize = 10)
         plt.tight_layout()
   
         plt.xlabel(xlabel)

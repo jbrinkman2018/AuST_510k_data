@@ -1,0 +1,26 @@
+
+import unittest
+
+from UploadData.FiveTenEntry import FiveTenEntry
+from UploadData.FiveTenEntries import FiveTenEntries
+from Client.Repl import Repl
+
+# from my_code import add
+
+def setup():
+    fiveTenEntries = FiveTenEntries()
+    
+    with open('pmn96cur.txt', 'r') as file:
+        for line in file:
+            entry= FiveTenEntry(line)
+            fiveTenEntries.add(entry)
+
+class TestFunctionality(unittest.TestCase):
+
+    def testStringTrim(self):
+        repl = Repl()
+        repl.eval(FiveTenEntries)
+        
+
+if __name__ == '__main__':
+    unittest.main()

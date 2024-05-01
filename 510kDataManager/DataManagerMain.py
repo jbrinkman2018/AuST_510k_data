@@ -21,8 +21,6 @@ with open('pmn96cur.txt', 'r') as file:
        entry= FiveTenEntry(line)
        fiveTenEntries.add(entry)
 
-# fiveTenEntries.calcProperties()
-
 # Prompt user input
 repl = Repl()
 repl.eval(fiveTenEntries)

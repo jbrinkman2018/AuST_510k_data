@@ -20,15 +20,20 @@ class FiveTenEntries:
         
         self.setDictionaries()
     
-    def trimDigit(self, category, threshold):
+    def trimDigit(self, category, threshold, maxMin):
         # print("i'm here")
         if category in dir(self):
             for item in getattr(self, category):
-                if (getattr(self, category).get(item) < int(threshold)):
-                    self.removeLater.append(item)
+                if(maxMin == "max"):
+                    if (getattr(self, category).get(item) > int(threshold)):
+                        self.removeLater.append(item)
+                else:
+                    if (getattr(self, category).get(item) < int(threshold)):
+                        self.removeLater.append(item)
             
             for item in self.removeLater:
                 del getattr(self, category)[item]
+            self.removeLater = []
         
     def clearDictionaries(self):
         self.kNumbers = dict()

@@ -1,7 +1,7 @@
 from UploadData.FiveTenEntry import FiveTenEntry
 from UploadData.FiveTenEntries import FiveTenEntries
 class Trimmer():
-    invalidInputString = "Expected: <CATEGORY>, <CATEGORYVARIABLE> | <THRESHOLDVALUE>"
+    invalidInputString = "Expected: <CATEGORY>, <CATEGORYVARIABLE> | <THRESHOLDVALUE>, <max/min> (for digit trim)"
     
     def __init__(self, data):
         self.data = data
@@ -14,10 +14,12 @@ class Trimmer():
         trimParams = trimString.split(', ')
         if (len(trimParams) < 2):
             print(self.invalidInputString)
+        elif ((digitOrString == "digit") & (len(trimParams) < 3)):
+            print(self.invalidInputString)
         elif self.toPlural(trimParams[0]) in dir(self.data):
             if (trimParams[1].isdigit()):
                 if (digitOrString == "digit"):
-                    self.data.trimDigit(self.toPlural(trimParams[0]), trimParams[1])
+                    self.data.trimDigit(self.toPlural(trimParams[0]), trimParams[1], trimParams[2])
                 else:
                     print(self.invalidInputString)
             else:
