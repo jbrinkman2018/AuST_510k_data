@@ -8,8 +8,11 @@ import sys
 
 from Client.Grapher import Grapher
 from UploadData.Trimmer import Trimmer
+from Pluralizer import Pluralizer
 
 class Repl:
+    queryInput = \
+        "What would you like to Trim?\n"
     categoriesString = \
     "Categories\n\
     - \"knumber\"\n\
@@ -40,13 +43,14 @@ class Repl:
     + categoriesString
     
     helpTrimDigit = \
-    "How do you want to trim your data using Values? <CATEGORY>, <THRESHOLD> \n\
+    "How do you want to trim your data using Values? <CATEGORY>, <THRESHOLD>, <max/min> \n\
     Ex.) Applicant, 10 \n"
     
     helpTrimString = \
     "How do you want to trim your data using categories? <CATEGORY>, <CATEGORYVARIABLE> \n\
     Ex.) Applicant, Aust \n\
-    Type \"finished\" when done trimming \n"\
+    Type \"finished\" when done trimming \n\
+    Type \"help, <CATEGORY>\" to query available objects to trim in a category\n"\
     + categoriesString
     
     def __init__(self) -> None:
@@ -56,20 +60,23 @@ class Repl:
         isRetrim = "yes"
         while (isRetrim == "yes"):
             print('Welcome to the 510K Data Manager. Let\'s evaluate some Data.')
-            print(self.helpTrimString)
             input = 'start'
+            print(self.helpTrimString)
             while not input == 'finished':
-                print(self.helpTrimString)
+                print(self.queryInput)
                 input = sys.stdin.readline().strip()
                 dataEntries = (Trimmer(dataEntries).eval(input, "string"))
+            
             dataEntries.calcProperties()
             digitTrim = 'start'
+            print(self.helpTrimDigit)
             while not digitTrim == 'finished':
-                print(self.helpTrimDigit)
+                print(self.queryInput)
                 digitTrim= sys.stdin.readline().strip()
                 if (digitTrim != 'finished'):
                     dataEntries = (Trimmer(dataEntries).eval(digitTrim, "digit"))
-
+                    
+            dataEntries.calcProperties()
             print(self.helpGraphString)
             graphing_input =  sys.stdin.readline().strip()
             
@@ -78,6 +85,10 @@ class Repl:
             isRetrim = sys.stdin.readline().strip()
         
     def switch_case(self, argument, dataEntries):
+        arguments =Pluralizer.toPlural(argument)
+        if (len(getattr(dataEntries, arguments)) > 30):
+            print("Unable to graph. Please continue trimming and try again\n")
+            return
         grapher = Grapher(dataEntries)
         if argument == "applicant":
             grapher.barhGraph(dataEntries.applicants, "Applicants", "Number of Applications", "Applicant")

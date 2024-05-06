@@ -1,9 +1,12 @@
 # Collection of 510K entries 
-
+from Pluralizer import Pluralizer
+import numpy as np
 class FiveTenEntries:
     # MIN_APPLICANTS_VALUE = 150
     DEFAULT_THRESHOLD = 0
-    removeLater = []
+    removeLater = set()
+    # removeThresholdIndex = 0
+    removeEntryIndex = set()
     
     def __init__(self):
         self.entryList = []
@@ -21,20 +24,39 @@ class FiveTenEntries:
         self.setDictionaries()
     
     def trimDigit(self, category, threshold, maxMin):
-        # print("i'm here")
-        if category in dir(self):
-            for item in getattr(self, category):
+        categories = Pluralizer.toPlural(category)
+        numpyEntryList = np.array(self.entryList)
+        if categories in dir(self):
+            for item in getattr(self, categories):
                 if(maxMin == "max"):
-                    if (getattr(self, category).get(item) > int(threshold)):
-                        self.removeLater.append(item)
+                    if (getattr(self, categories).get(item) > int(threshold)):
+                        self.removeLater.add(item)
                 else:
-                    if (getattr(self, category).get(item) < int(threshold)):
-                        self.removeLater.append(item)
+                    if (getattr(self, categories).get(item) < int(threshold)):
+                        self.removeLater.add(item)
             
-            for item in self.removeLater:
-                del getattr(self, category)[item]
-            self.removeLater = []
-        
+            for item in sorted(self.removeLater):
+                ## Find indices where 'item' is present in the 'category' attribute of elements
+                indices = np.where([item in getattr(entry,category) for entry in numpyEntryList if item != ''])[0]
+                ## Append the found indices to self.removeEntryIndex
+                for index in indices:
+                    self.removeEntryIndex.add(index)
+                indices = []
+                del getattr(self, categories)[item]
+            
+            if (len(self.removeEntryIndex)):
+                self.entryList = np.delete(numpyEntryList, np.array(list(self.removeEntryIndex)))
+            self.removeEntryIndex = set()
+            self.removeLater = set()
+    
+    def print(self, category):
+        categories = Pluralizer.toPlural(category)
+        if (~len(getattr(self, categories))):
+             self.calcProperties()
+        mydictionary = getattr(self, categories)
+        for key in mydictionary:
+            print(key)
+     
     def clearDictionaries(self):
         self.kNumbers = dict()
         self.applicants = dict()
