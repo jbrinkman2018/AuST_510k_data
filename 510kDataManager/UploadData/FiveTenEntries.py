@@ -1,4 +1,5 @@
 # Collection of 510K entries 
+
 from Pluralizer import Pluralizer
 import numpy as np
 class FiveTenEntries:
@@ -11,18 +12,22 @@ class FiveTenEntries:
     def __init__(self):
         self.entryList = []
         self.clearDictionaries()
-        
+    
+    # add a entry into the entryList (input an entry into the list)
     def add(self, entry):
         self.entryList.append(entry)
-        
+    
+    # reset all dictionaries depending on current entries in the entryList(current Data set)
     def calcProperties(self):
         self.clearDictionaries()
         
-        for entry in self.entryList:# Check if the item is already in the dictionary
+        # Check if the item is already in the dictionary
+        for entry in self.entryList:
             self.allocateVariables(entry)
         
         self.setDictionaries()
     
+    # trim the data set based on a certain minimum or maximum digit parameter
     def trimDigit(self, category, threshold, maxMin):
         categories = Pluralizer.toPlural(category)
         numpyEntryList = np.array(self.entryList)
@@ -36,9 +41,11 @@ class FiveTenEntries:
                         self.removeLater.add(item)
             
             for item in sorted(self.removeLater):
-                ## Find indices where 'item' is present in the 'category' attribute of elements
+                
+                # Find indices where 'item' is present in the 'category' attribute of elements
                 indices = np.where([item in getattr(entry,category) for entry in numpyEntryList if item != ''])[0]
-                ## Append the found indices to self.removeEntryIndex
+                
+                # Append the found indices to self.removeEntryIndex
                 for index in indices:
                     self.removeEntryIndex.add(index)
                 indices = []
@@ -49,6 +56,7 @@ class FiveTenEntries:
             self.removeEntryIndex = set()
             self.removeLater = set()
     
+    # print all the keys in a certain dictionary
     def print(self, category):
         categories = Pluralizer.toPlural(category)
         if (~len(getattr(self, categories))):
@@ -57,6 +65,7 @@ class FiveTenEntries:
         for key in mydictionary:
             print(key)
      
+    # clear all dictionaries
     def clearDictionaries(self):
         self.kNumbers = dict()
         self.applicants = dict()
@@ -81,6 +90,8 @@ class FiveTenEntries:
         self.expeditedReviews = dict()
         self.deviceNames = dict()
     
+    # set dictionaries to reflect the number of elements attributed to each unique key... 
+    # result of allocate variables function
     def setDictionaries(self):
         self.applicants = dict(sorted(self.applicants.items(), key=lambda item: item[1], reverse=False))
         self.types = dict(sorted(self.types.items(), key=lambda item: item[1], reverse=False))
@@ -105,6 +116,7 @@ class FiveTenEntries:
         self.expeditedReviews = dict(sorted(self.expeditedReviews.items(), key=lambda item: item[1], reverse=False))
         self.deviceNames = dict(sorted(self.deviceNames.items(), key=lambda item: item[1], reverse=False))
     
+    # add up the number of occurences of each unique entry 
     def allocateVariables(self, entry):
         ## APPLICANT
         if entry.applicant in self.applicants: 

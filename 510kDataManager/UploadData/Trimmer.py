@@ -9,6 +9,7 @@ class Trimmer():
         self.removeLater = []
         self.resultEntries = FiveTenEntries()
     
+    # function that evaluates the input string and allocates it depending on the parameters
     def eval(self, trimString, digitOrString):
         if (trimString == "finished"):
             return self.data

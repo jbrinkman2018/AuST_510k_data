@@ -1,4 +1,4 @@
-# read eval print loop 
+# high level read eval print loop 
 # prompts console for desired charts
 
 # Jared Brinkman
@@ -12,7 +12,8 @@ from Pluralizer import Pluralizer
 
 class Repl:
     queryInput = \
-        "What would you like to Trim?\n"
+    "What would you like to Trim?\n"
+    
     categoriesString = \
     "Categories\n\
     - \"knumber\"\n\
@@ -83,7 +84,8 @@ class Repl:
             self.switch_case(graphing_input, dataEntries)
             print("Would you like to retrim? <yes>, <no>")
             isRetrim = sys.stdin.readline().strip()
-        
+    
+    # graphing unique graphs and variables for desired scope
     def switch_case(self, argument, dataEntries):
         arguments =Pluralizer.toPlural(argument)
         if (len(getattr(dataEntries, arguments)) > 30):

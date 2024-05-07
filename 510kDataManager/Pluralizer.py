@@ -1,4 +1,5 @@
 class Pluralizer:
+    # Makes the given parameter plural
     @staticmethod
     def toPlural(word):
         if word.endswith('y'):

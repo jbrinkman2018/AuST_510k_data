@@ -9,8 +9,9 @@ class Grapher:
     def __init__(self, dataEntries):
         self.data = dataEntries
     
+    # plot a horizontal bar graph
     def barhGraph(self, category, title, xlabel, ylabel):
-        print("we are graphing")
+        # print("we are graphing")
         keys = list(category.keys())
         values = list(category.values())
         plt.barh(keys, values)
@@ -24,8 +25,10 @@ class Grapher:
         
         # Show the plot
         plt.show()
+    
+    # plot a bar graph 
     def barGraph(self, category, title, xlabel, ylabel):
-        print("we are graphing")
+        # print("we are graphing")
         keys = list(category.keys())
         values = list(category.values())
         plt.bar(keys, values)

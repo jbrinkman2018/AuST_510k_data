@@ -1,4 +1,4 @@
-# Data stored into an in memory variable
+# Data stored into a in memory variable
 
 # Jared Brinkman 3-26-24
 
