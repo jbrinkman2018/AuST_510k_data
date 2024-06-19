@@ -45,13 +45,13 @@ class Repl:
     
     helpTrimDigit = \
     "How do you want to trim your data using Values? <CATEGORY>, <THRESHOLD>, <max/min> \n\
-    Ex.) Applicant, 10 \n"
+    Ex.) Applicant + 10 \n"
     
     helpTrimString = \
     "How do you want to trim your data using categories? <CATEGORY>, <CATEGORYVARIABLE> \n\
-    Ex.) Applicant, Aust \n\
+    Ex.) Applicant + Aust \n\
     Type \"finished\" when done trimming \n\
-    Type \"help, <CATEGORY>\" to query available objects to trim in a category\n"\
+    Type \"help + <CATEGORY>\" to query available objects to trim in a category\n"\
     + categoriesString
     
     def __init__(self) -> None:
@@ -99,64 +99,64 @@ class Repl:
             grapher.barhGraph(dataEntries.types, "Type", "Number of Applications", "Type of Application")
             return
         elif argument == "SSPIndicator":
-            grapher.barGraph(dataEntries.SSPIndicators, "SSPIndicator", "Number of Applications", "SSP Indicator")
+            grapher.barGraph(dataEntries.SSPIndicators, "SSPIndicator", "SSP Indicator", "Number of Applications")
             return
         elif argument == "decisionDate":
-            grapher.barGraph(dataEntries.decisionDates, "Decision Dates", "Number of Applications", "Decision Dates")
+            grapher.barGraph(dataEntries.decisionDates, "Decision Dates", "Decision Dates", "Number of Applications")
             return
         elif argument == "kNumber":
-            grapher.barGraph(dataEntries.kNumbers, "kNumbers", "Number of Applications", "k Numbers")
+            grapher.barGraph(dataEntries.kNumbers, "kNumbers", "k Numbers", "Number of Applications")
             return
         elif argument == "dateReceived":
-            grapher.barGraph(dataEntries.dateReceiveds, "Dates Received", "Number of Applications", "Dates Received")
+            grapher.barGraph(dataEntries.dateReceiveds, "Dates Received", "Dates Received", "Number of Applications")
             return
         elif argument == "contact":
             grapher.barhGraph(dataEntries.contacts, "Contact", "Number of Applications", "Contact For Application")
             return
         elif argument == "street1":
-            grapher.barGraph(dataEntries.street1s, "Street1", "Number of Applications", "Contact Street 1")
+            grapher.barGraph(dataEntries.street1s, "Street1", "Contact Street 1", "Number of Applications")
             return
         elif argument == "street2":
-            grapher.barGraph(dataEntries.street2s, "Street2", "Number of Applications", "Contact Street 2")
+            grapher.barGraph(dataEntries.street2s, "Street2", "Contact Street 2", "Number of Applications")
             return
         elif argument == "city":
-            grapher.barGraph(dataEntries.cities, "Cities", "Number of Applications", "Contact City")
+            grapher.barGraph(dataEntries.cities, "Cities", "Contact City", "Number of Applications")
             return
         elif argument == "state":
-            grapher.barGraph(dataEntries.states, "States", "Number of Applications", "Contact State")
+            grapher.barGraph(dataEntries.states, "States", "Contact State", "Number of Applications")
             return
         elif argument == "countryCode":
             grapher.barhGraph(dataEntries.countryCode, "Country Code", "Number of Applications", "Contact Country Code")
             return
         elif argument == "zip":
-            grapher.barGraph(dataEntries.zips, "Zip", "Number of Applications", "Contact Zip")
+            grapher.barGraph(dataEntries.zips, "Zip", "Contact Zip", "Number of Applications")
             return
         elif argument == "postalCode":
-            grapher.barGraph(dataEntries.postalCodes, "Postal Code", "Number of Applications", "Contact Postal Codes")
+            grapher.barGraph(dataEntries.postalCodes, "Postal Code", "Contact Postal Codes", "Number of Applications")
             return
         elif argument == "decision":
-            grapher.barGraph(dataEntries.decisions, "Decision", "Number of Applications", "Application Decision")
+            grapher.barGraph(dataEntries.decisions, "Decision", "Application Decision", "Number of Applications")
             return
         elif argument == "reviewAdviseComm":
-            grapher.barGraph(dataEntries.revewAdviseComms, "Review Advise Comm.", "Number of Applications", "Review Advise Comm.")
+            grapher.barGraph(dataEntries.revewAdviseComms, "Review Advise Comm.", "Review Advise Comm.", "Number of Applications")
             return
         elif argument == "productCode":
             grapher.barhGraph(dataEntries.productCodes, "Product Code", "Number of Applications", "Product Code")
             return
         elif argument == "stateOrSumm":
-            grapher.barGraph(dataEntries.stateOrSumms, "State or Summ", "Number of Applications", "State Or Summ")
+            grapher.barGraph(dataEntries.stateOrSumms, "State or Summ", "State Or Summ", "Number of Applications")
             return
         elif argument == "classAdviceSumm":
-            grapher.barGraph(dataEntries.classAdviceSumms, "Class Advice Summ", "Number of Applications", "Class Advice Summ")
+            grapher.barGraph(dataEntries.classAdviceSumms, "Class Advice Summ", "Class Advice Summ", "Number of Applications")
             return
         elif argument == "thirdParty":
-            grapher.barGraph(dataEntries.thirdParties, "Third Party", "Number of Applications", "Third Party")
+            grapher.barGraph(dataEntries.thirdParties, "Third Party", "Third Party", "Number of Applications")
             return
         elif argument == "expeditedReview":
-            grapher.barGraph(dataEntries.expeditedReviews, "Expedited Review", "Number of Applications", "Expedited Review")
+            grapher.barGraph(dataEntries.expeditedReviews, "Expedited Review", "Expedited Review", "Number of Applications")
             return
         elif argument == "deviceName":
-            grapher.barGraph(dataEntries.deviceNames, "Device Name", "Number of Applications", "Device Name")
+            grapher.barGraph(dataEntries.deviceNames, "Device Name", "Device Name", "Number of Applications")
             return
         else:
             return "Incomplete argument parameter. Expected <CATEGORY>"

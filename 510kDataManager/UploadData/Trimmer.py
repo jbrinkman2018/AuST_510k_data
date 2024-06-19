@@ -2,7 +2,7 @@ from UploadData.FiveTenEntry import FiveTenEntry
 from UploadData.FiveTenEntries import FiveTenEntries
 from Pluralizer import Pluralizer
 class Trimmer():
-    invalidInputString = "Expected: <CATEGORY>, <CATEGORYVARIABLE> | <THRESHOLDVALUE>, <max/min> (for digit trim)"
+    invalidInputString = "Expected: <CATEGORY> + (<CATEGORYVARIABLE> | <THRESHOLDVALUE>) + <max/min> (for digit trim)"
     
     def __init__(self, data):
         self.data = data
@@ -13,7 +13,7 @@ class Trimmer():
     def eval(self, trimString, digitOrString):
         if (trimString == "finished"):
             return self.data
-        trimParams = trimString.split(', ')
+        trimParams = trimString.split(' + ')
         if (len(trimParams) < 2):
             print(self.invalidInputString)
         elif(trimParams[0] == "help"):
